@@ -1,0 +1,140 @@
+# 2. Create a derived class from Student as EnggStudent with :
+    # a. Data members as :
+        # i. Branch
+        # ii. InternalMarks
+    # b. Add the following methods :
+        # i. Parameterized constructor
+        # ii. Display
+        # iii. Accept
+        # iv. override Method CalculateRank
+        # v. Override __str__ Method
+
+
+class Student:
+    def __init__(self, sid, name, age, percentage):
+        self.sid = sid 
+        self.name = name 
+        self.age = age 
+        self.percentage = percentage 
+        
+    def display(self):
+        return (
+            f'STUDENT ID: {self.sid}\n'
+            f'STUDENT NAME: {self.name}\n'
+            f'STUDENT AGE: {self.age}\n'
+            f'PERCENTAGE: {self.percentage}'
+            )
+        
+    def accept(self):
+        self.sid = int(input("Enter A Student ID: "))
+        self.name = input("Enter A Student NAME: ")
+        self.age = int(input("Enter A Student AGE: "))
+        self.percentage = float(input("Enter A Student PERCENTAGE: "))
+        return "Details Accepted Successfully"
+        
+        
+    def calculateRank(self):
+        if self.percentage >= 90:
+            data = f"The Given Student {self.sid} is TOP 1% RANK" 
+        elif self.percentage >= 80:
+            data = f"The Given Student {self.sid} is 1%-10% RANK"
+        elif self.percentage >= 70:
+             data = f"The Given Student {self.sid} is 11%-20% RANK"
+        elif self.percentage >= 60:
+             data = f"The Given Student {self.sid} is 21%-30% RANK"
+        elif self.percentage >= 50:
+             data = f"The Given Student {self.sid} is 31%-40% RANK"
+        elif self.percentage < 50:
+             data = f"The Given Student {self.sid} is Below 40% RANK"
+        return data 
+        
+    def __str__(self):
+        return (
+            f'STUDENT ID: {self.sid}\n'
+            f'STUDENT NAME: {self.name}\n'
+            f'STUDENT AGE: {self.age}\n'
+            f'PERCENTAGE: {self.percentage}'
+            )
+    
+std1 = Student(101, 'Kunal', 22, 81)
+print(std1.display())
+print(std1.calculateRank())
+print(std1.accept())
+print(std1)
+    
+class EngStudent(Student):
+    
+    total_marks = 150
+
+    def __init__(self, sid, name, age, percentage , branch, internal_marks):
+        super().__init__(sid, name, age, percentage)
+        self.branch = branch 
+        self.internal_marks = internal_marks 
+        self.total_marks = EngStudent.total_marks
+    
+    def display(self):
+        return (
+            f'STUDENT ID: {self.sid}\n'
+            f'STUDENT NAME: {self.name}\n'
+            f'STUDENT AGE: {self.age}\n'
+            f'PERCENTAGE: {self.percentage}\n'
+            f'BRANCH: {self.branch}\n'
+            f'INTERNAL MARKS: {self.internal_marks}'
+            )
+            
+    def accept(self):
+        self.sid = int(input("Enter A Student ID: "))
+        self.name = input("Enter A Student NAME: ")
+        self.age = int(input("Enter A Student AGE: "))
+        self.percentage = float(input("Enter A Student PERCENTAGE: "))
+        self.branch = input("Enter BRANCH NAME: ")
+        self.internal_marks = int(input("Enter INTERNAL MARKS: "))
+        return "Details Accepted Successfully"
+    
+    def calculateRank(self):
+        self.final_marks = self.percentage + self.internal_marks 
+        
+        if self.final_marks >= 135:
+            data = f"The Given Student {self.sid} is TOP 1% RANK" 
+        elif self.final_marks >= 120:
+            data = f"The Given Student {self.sid} is 1%-10% RANK"
+        elif self.final_marks >= 105:
+             data = f"The Given Student {self.sid} is 11%-20% RANK"
+        elif self.final_marks >= 90:
+             data = f"The Given Student {self.sid} is 21%-30% RANK"
+        elif self.final_marks >= 75:
+             data = f"The Given Student {self.sid} is 31%-40% RANK"
+        elif self.final_marks >= 60:
+             data = f"The Given Student {self.sid} is 40%-50% RANK"
+        else:
+             data = f"The Given Student {self.sid} is Below 40% RANK"
+
+        return data
+    
+    def __str__(self):
+        return (
+            f'STUDENT ID: {self.sid}\n'
+            f'STUDENT NAME: {self.name}\n'
+            f'STUDENT AGE: {self.age}\n'
+            f'PERCENTAGE: {self.percentage}\n'
+            f'BRANCH: {self.branch}\n'
+            f'INTERNAL MARKS: {self.internal_marks}'
+            )
+            
+eng1 = EngStudent(101, 'Kunal', 22, 81, 'aiml', 30)
+# print(eng1.display())
+# print(eng1.calculateRank())
+# print(eng1.accept())
+print(eng1)
+# Example Usage         
+std2 = Student(102, 'Alice', 21, 92)
+print(std2)         
+eng2 = EngStudent(201, 'Bob', 23, 85, 'CSE', 40)
+print(eng2)
+
+# Example Usage         
+
+std2 = Student(102, 'Alice', 21, 92)
+print(std2)     
+eng2 = EngStudent(201, 'Bob', 23, 85, 'CSE', 40)
+print(eng2) 
