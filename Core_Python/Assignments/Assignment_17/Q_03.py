@@ -7,6 +7,8 @@
         # iii. Accept
         # iv. override Method CalculateRank
         # v. Override __str__ Method
+        
+             
 class Student:
     def __init__(self, sid, name, age, percentage):
         self.sid = sid 
