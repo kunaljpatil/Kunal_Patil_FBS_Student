@@ -1,0 +1,101 @@
+Q.1 Write a SQL statement to insert a record as follows:
+Employees :
+
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(20),
+    last_name VARCHAR(20),
+    email VARCHAR(25),
+    phone_number VARCHAR(20),
+    hire_date DATE,
+    job_id VARCHAR(10),
+    salary DECIMAL(8,2),
+    commission_pct DECIMAL(4,2),
+    manager_id INT,
+    department_id INT
+);
+
+
+INSERT INTO employees
+(employee_id, first_name, last_name, email, phone_number,
+ hire_date, job_id, salary, commission_pct, manager_id, department_id)
+VALUES
+(100,'Steven','King','SKING','515.123.4567','1987-06-17','AD_PRES',24000.00,0.00,200,10),
+(101,'Neena','Kochhar','NKOCHHAR','515.123.4568','1987-06-18','AD_VP',17000.00,0.00,200,10),
+(102,'Lex','De Haan','LDEHAAN','515.123.4569','1987-06-19','AD_VP',17000.00,0.00,200,10),
+(103,'Alexander','Hunold','AHUNOLD','590.423.4567','1987-06-20','IT_PROG',9000.00,0.00,103,60),
+(104,'Bruce','Ernst','BERNST','590.423.4568','1987-06-21','IT_PROG',6000.00,0.00,103,60),
+(105,'David','Austin','DAUSTIN','590.423.4569','1987-06-22','IT_PROG',4800.00,0.00,103,60),
+(106,'Valli','Pataballa','VPATABAL','590.423.4560','1987-06-23','IT_PROG',4800.00,0.00,103,60),
+(107,'Diana','Lorentz','DLORENTZ','590.423.5567','1987-06-24','IT_PROG',4200.00,0.00,114,30),
+(108,'Nancy','Greenberg','NGREENBE','515.124.4569','1987-06-25','SA_MAN',12000.00,0.00,145,80),
+(109,'Daniel','Faviet','DFAVIET','515.124.4169','1987-06-26','SA_MAN',9000.00,0.00,145,80);
+
+
+-- Create table
+CREATE TABLE department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(30),
+    mgr_id INT,
+    location_id INT
+);
+
+-- Insert records
+INSERT INTO department VALUES
+(10, 'ADMINISTRATION', 200, 1700),
+(20, 'MARKETING', 201, 1800),
+(30, 'PURCHASING', 114, 1700),
+(40, 'HUMAN RESOUCES', 203, 2400),
+(50, 'SHIPPING', 121, 1500),
+(60, 'IT', 103, 1400),
+(70, 'PUBLIC RELATIONS', 204, 2700),
+(80, 'SALES', 145, 2500);
+
+Q2.Write a SQL statement to insert one row in jobs table to ensure that no duplicate value will be entered in the job_id column.:
+-- Create table
+CREATE TABLE jobs (
+    job_id VARCHAR(15) PRIMARY KEY,
+    job_title VARCHAR(30),
+    min_salary INT,
+    max_salary INT
+);
+
+-- Insert records
+INSERT INTO jobs VALUES
+('AD_PRES', 'PRESIDENT', 20000, 40000),
+('AD_VP', 'ADM VICE PRESIDENT', 15000, 30000),
+('Ad_asst', 'ADM ASSISTANT', 3000, 6000),
+('FI_MGR', 'FINANACE MANAGER', 8200, 16000),
+('FI_ACCOUNT', 'ACCOUNTANT', 4200, 9000),
+('AC_MGR', 'ACCOUNTING MANAGER', 8200, 16000),
+('AC_ACCOUNT', 'PUBLIC ACCOUNTANT', 4200, 9000),
+('SA_MAN', 'SALES MANAGER', 10000, 20000);
+
+
+Q3.Write SQL statement to increment salary of each emp by 10%.
+
+UPDATE employees
+SET salary = salary + (salary * 0.10);
+
+Q.4 Write a SQL statement to change the email column of employees table with 'not available' for those employees whose department_id is 80 :
+UPDATE employees
+SET email = 'not available'
+WHERE department_id = 80;
+
+Q.5 Write a SQL statement to change the email column of employees table with 'not available' for those employees who belongs to the 'Purchasing' department.
+UPDATE employees
+SET email = 'not available'
+WHERE department_id IN (
+    SELECT dept_id
+    FROM department
+    WHERE dept_name = 'PURCHASING'
+);
+
+
+Q6. Write a SQL statement to change the email and commission_pct column of employees table with 'not available' and 0.10 for all employees.
+
+UPDATE employees
+SET email = 'not available',
+    commission_pct = 0.10;
+
+
